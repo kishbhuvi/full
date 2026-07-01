@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Library System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="login-panel glass-card animate-up" id="loginPanel">
+      <span class="eyebrow">Admin Portal</span>
+      <h1>Admin Login or Register</h1>
+      <p>Create the first admin account or login with existing credentials.</p>
+      <div class="tabs">
+        <button type="button" id="loginTab" class="tab active">Login</button>
+        <button type="button" id="registerTab" class="tab">Register</button>
+      </div>
+      <form id="loginForm" class="simple-form">
+        <label>
+          Username
+          <input type="text" name="username" placeholder="admin" required />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" placeholder="Password" required />
+        </label>
+        <button type="submit" class="primary">Login</button>
+      </form>
+      <form id="adminRegisterForm" class="simple-form hidden">
+        <label>
+          Username
+          <input type="text" name="username" placeholder="admin" required />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" placeholder="Password" required />
+        </label>
+        <button type="submit" class="secondary">Register Admin</button>
+      </form>
+      <div id="message" class="status-message"></div>
+    </section>
+
+    <div id="mainPanel" class="hidden">
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <span class="eyebrow">Campus Library</span>
+          <h1>Student Library Management</h1>
+          <p>Issue books, return books, view history, and export records in a secure admin portal.</p>
+        </div>
+        <div class="hero-card">
+          <div class="stat-card">
+            <strong>Only admin access</strong>
+            <p>Register an admin username and password, then use those credentials to manage the library.</p>
+          </div>
+          <div class="stat-card">
+            <strong>Issue history</strong>
+            <p>See all issued and returned book entries with timestamps.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="top-actions glass-card animate-up delay-1">
+        <button id="logoutButton" class="secondary">Logout Admin</button>
+      </section>
+
+      <section class="form-section glass-card animate-up">
+        <h2>Issue a Book</h2>
+        <form id="loanForm" class="grid-form">
+          <label>
+            Student Name
+            <input type="text" name="studentName" placeholder="Ayesha Khan" required />
+          </label>
+          <label>
+            Roll Number
+            <input type="text" name="rollNo" placeholder="CS1023" required />
+          </label>
+          <label>
+            Department
+            <input type="text" name="dept" placeholder="Computer Science" required />
+          </label>
+          <label>
+            Book Title
+            <input type="text" name="bookName" placeholder="Data Structures" required />
+          </label>
+          <label>
+            Book Number
+            <input type="text" name="bookNo" id="bookNo" placeholder="BK-00123" required />
+          </label>
+          <div class="scanner-group">
+            <button type="button" id="scanButton" class="secondary">Scan Book Code</button>
+            <p class="hint">Use a hardware scanner or paste the scanned code into Book Number.</p>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="primary">Issue Book</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="form-section glass-card animate-up delay-1">
+        <h2>Register a Book</h2>
+        <form id="bookRegisterForm" class="grid-form">
+          <label>
+            Book Title
+            <input type="text" name="registerTitle" id="registerTitle" placeholder="Digital Logic" required />
+          </label>
+          <label>
+            Author Name
+            <input type="text" name="registerAuthor" id="registerAuthor" placeholder="Thomas L. Floyd" />
+          </label>
+          <label>
+            Book Number
+            <input type="text" name="registerBookNo" id="registerBookNo" placeholder="BK-00124" required />
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="primary">Register Book</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="inventory-panel glass-card animate-up delay-1">
+        <div class="panel-header">
+          <h2>Book Inventory</h2>
+          <div class="panel-actions">
+            <button id="listAllButton" class="secondary">All Books</button>
+            <button id="listAvailableButton" class="secondary">Available</button>
+            <button id="listLoanedButton" class="secondary">Loaned</button>
+          </div>
+        </div>
+        <form id="bookSearchForm" class="search-form">
+          <input type="text" id="bookSearchInput" placeholder="Search title, author, or book number" />
+          <button type="submit" class="primary">Search Books</button>
+        </form>
+        <div class="table-wrap">
+          <table id="booksTable">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Book No</th>
+                <th>Status</th>
+                <th>Loaned At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="5" class="empty-state">Search or show books to display inventory.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="form-section glass-card animate-up delay-1">
+        <h2>Return a Book</h2>
+        <form id="returnForm" class="simple-form">
+          <label>
+            Book Number
+            <input type="text" name="returnBookNo" id="returnBookNo" placeholder="BK-00123" required />
+          </label>
+          <button type="submit" class="secondary">Return Book</button>
+        </form>
+      </section>
+
+      <section class="records-panel glass-card animate-up delay-2">
+        <div class="panel-header">
+          <h2>Issue History</h2>
+          <div class="panel-actions">
+            <button id="refreshButton" class="secondary">Refresh</button>
+            <button id="exportButton" class="primary">Export to Excel</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="recordsTable">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Roll No</th>
+                <th>Department</th>
+                <th>Book</th>
+                <th>Book No</th>
+                <th>Action</th>
+                <th>Recorded At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="7" class="empty-state">Please login to view records.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
